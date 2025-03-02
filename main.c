@@ -7,7 +7,6 @@ void gameBoard() {
     for (int j = 0; j < A_SET; j++) {
       printf("| %c | ", 'x');
     }
-    printf("\n");
   }
 }
 
