@@ -7,10 +7,61 @@
 typedef char String25[26];
 
 void checkWinner(char P_board[][A_SET], bool *gameOver, String25 winner) {
+  // Tres
   if (P_board[0][0] == 'T' && P_board[0][1] == 'T' && P_board[0][2] == 'T' &&
       P_board[0][3] == 'T') {
     *gameOver = true;
     strcpy(winner, "Tres");
+  } else if (P_board[3][0] == 'T' && P_board[3][1] == 'T' &&
+             P_board[3][2] == 'T' && P_board[3][3] == 'T') {
+    *gameOver = true;
+    strcpy(winner, "Tres");
+  } else if (P_board[0][0] == 'T' && P_board[1][1] == 'T' &&
+             P_board[2][2] == 'T' && P_board[3][3] == 'T') {
+    *gameOver = true;
+    strcpy(winner, "Tres");
+  } else if (P_board[0][3] == 'T' && P_board[1][2] == 'T' &&
+             P_board[2][1] == 'T' && P_board[3][0] == 'T') {
+    *gameOver = true;
+    strcpy(winner, "Tres");
+  }
+  // Uno
+  if (P_board[0][0] == 'U' && P_board[0][1] == 'U' && P_board[0][2] == 'U' &&
+      P_board[0][3] == 'U') {
+    *gameOver = true;
+    strcpy(winner, "Uno");
+  } else if (P_board[3][0] == 'U' && P_board[3][1] == 'U' &&
+             P_board[3][2] == 'U' && P_board[3][3] == 'U') {
+    *gameOver = true;
+    strcpy(winner, "Uno");
+  } else if (P_board[0][0] == 'U' && P_board[1][1] == 'U' &&
+             P_board[2][2] == 'U' && P_board[3][3] == 'U') {
+    *gameOver = true;
+    strcpy(winner, "Uno");
+  } else if (P_board[0][3] == 'U' && P_board[1][2] == 'U' &&
+             P_board[2][1] == 'U' && P_board[3][0] == 'U') {
+    *gameOver = true;
+    strcpy(winner, "Uno");
+  }
+
+  // Dos
+  if (!(*gameOver)) {
+    bool allUsed = true;
+    for (int i = 0; i < A_SET; i++) {
+      for (int j = 0; j < A_SET; j++) {
+        if (P_board[i][j] == ' ') {
+          allUsed = false;
+          break;
+        }
+      }
+      if (!allUsed)
+        break;
+    }
+
+    if (allUsed) {
+      *gameOver = true;
+      strcpy(winner, "Dos");
+    }
   }
 }
 
@@ -138,6 +189,7 @@ int main() {
     gameTurn(P_board, &isUnoTurn, &isDosTurn, &isTresTurn);
     checkWinner(P_board, &gameOver, winner);
   }
+  printf("Game Over!!!!\n");
   printf("Winner is %s\n", winner);
   return 0;
 }
